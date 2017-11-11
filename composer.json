@@ -1,0 +1,11 @@
+{
+    "name": "kofus/magenta-media",
+    "type": "library",
+    
+    "autoload": {
+        "psr-0": {
+            "Kofus\\Media\\": "src/Kofus/Media/"
+        },
+        "classmap" : ["Kofus/Media/Module.php"]
+    }
+}
