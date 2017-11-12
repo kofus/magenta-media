@@ -50,6 +50,11 @@ class ImageEntity extends FileEntity
 		return $this->height;
 	}
 	
+	public function __toString()
+	{
+	    return $this->getTitle() . ' (' . $this->getNodeId() . ')';
+	}
+	
 	
 	
 }

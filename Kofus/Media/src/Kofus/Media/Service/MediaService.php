@@ -71,6 +71,40 @@ class MediaService extends AbstractService
         return $link;
     }
     
+    public function getVideoLinks(\Kofus\Media\Entity\VideoDisplayEntity $video)
+    {
+        $files = $this->nodes()->getRelatedNodes($video, 'VF');
+        $links = array();
+        foreach ($files as $file)
+            $links[] = $this->getVideoLink($video);
+        return $links;
+    }
+    
+    public function getVideoLink(\Kofus\Media\Entity\VideoFileEntity $video, array $options=array())
+    {
+        $link = $this->em()->getRepository('Kofus\System\Entity\LinkEntity')->findOneBy(array('linkedNodeId' => $video->getNodeId(), 'context' => 'video'));
+        if (! $link) {
+            if ($video->getTitle()) {
+                $filter = new \Kofus\System\Filter\UriSegment();
+                $uriSegment = $filter->filter($video->getTitle());
+            } else {
+                $uriSegment = Rand::getString(16, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789');
+            }
+            
+            $uri = '/cache/media/video/' . $uriSegment . '.m4v';
+            
+            $link = new \Kofus\System\Entity\LinkEntity();
+            $link->setLinkedNodeId($video->getNodeId())
+            ->setContext('video')
+            ->setUri($uri);
+            
+            $this->em()->persist($link);
+            $this->em()->flush();
+        }
+        
+        return $link;
+    }
+    
     public function getPdfLink(\Kofus\Media\Entity\PdfEntity $pdf, array $options=array())
     {
     	$link = $this->em()->getRepository('Kofus\System\Entity\LinkEntity')->findOneBy(array('linkedNodeId' => $pdf->getNodeId(), 'context' => 'pdf'));

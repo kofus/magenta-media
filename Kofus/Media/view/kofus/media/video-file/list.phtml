@@ -1,0 +1,48 @@
+<?php echo $this->nodeNavigation('VF', 'list') ?>
+
+<div class="row">
+    <div class="col-md-9">
+        <?php if (count($this->paginator)) : ?>
+            <table class="table table-hover">
+            	<thead>
+            		<tr>
+            			<td>ID</td>
+            			<td>Titel</td>
+            			<td>URI</td>
+            		</tr>
+            	</thead>
+				<tbody data-link="row" class="rowlink">
+                    <?php foreach ($this->paginator as $entity) : ?>
+                        <tr class="<?php if (!$entity->isEnabled()) echo 'danger'?>">
+                            <td>
+                                <a href="<?php echo $this->url('kofus_system', array('controller' => 'node', 'action' => 'edit', 'id' => $entity->getNodeId()), true) ?>">
+                                	<?php echo $this->escapeHtml($entity->getNodeId()) ?>
+                                </a>
+                            </td>
+                            <td>
+                            	<?php echo $this->escapeHtml($entity->getTitle()) ?>
+                            </td>
+                            <td>
+                            	<?php echo $this->escapeHtml($entity->getMimeType()) ?>
+                            </td>
+                            <td>
+                            	<?php echo $this->media()->getVideoLink($entity) ?>
+                            </td>
+                            
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+                <?php ?>
+            </table>
+        <?php else : ?>
+            <p><?php echo $this->escapeHtml($this->translate('No entries.')) ?></p>
+        <?php endif ?>
+    </div>
+    <div class="col-md-3">
+        <div class="list-group">
+    	      <a href="<?php echo $this->urlBack ?>" class="list-group-item">
+    	          <?php echo $this->escapeHtml($this->translate('Close')) ?>
+    	      </a>
+        </div>
+    </div>
+</div>

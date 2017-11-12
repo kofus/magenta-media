@@ -23,6 +23,22 @@ class FileEntity implements Node\NodeInterface, Node\EnableableNodeInterface
     	return $this->id;
     }
     
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    protected $title;
+    
+    public function setTitle($value)
+    {
+        $this->title = $value; return $this;
+    }
+    
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    
+    
 	
 	/**
 	 * @ORM\Column()
@@ -99,6 +115,23 @@ class FileEntity implements Node\NodeInterface, Node\EnableableNodeInterface
 		}
 		return $this->enabled;
 	}
+	
+	/**
+	 * @ORM\Column(type="json_array")
+	 */
+	protected $params = array();
+	
+	public function setParam($key, $value)
+	{
+	    $this->params[$key] = $value; return $this;
+	}
+	
+	public function getParam($key)
+	{
+	    if (array_key_exists($key, $this->params))
+	        return $this->params[$key];
+	}
+	
 	
 	public static function determineType(array $infoArray)
 	{
