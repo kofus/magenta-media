@@ -4,6 +4,7 @@ return array(
         'available' => array (
             'IMG' => array (
                 'label' => 'Image',
+                'label_pl' => 'Images',
                 'entity' => 'Kofus\Media\Entity\ImageEntity',
                 'controllers' => array (
                     'Kofus\Media\Controller\Image'
