@@ -32,6 +32,7 @@
                 </tbody>
                 <?php ?>
             </table>
+            <?php echo $this->paginationControl() ?>
         <?php else : ?>
             <p><?php echo $this->escapeHtml($this->translate('No entries.')) ?></p>
         <?php endif ?>
