@@ -34,18 +34,14 @@ class VideoFileController extends AbstractActionController
         if (! $file instanceof \Kofus\Media\Entity\VideoFileEntity)
             throw new \Exception('Node '.$file->getNodeId().' must implement VideoFileEntity');
             
-            $cacheFilename = 'public/' . $link->getUri();
-            if (! is_dir(dirname($cacheFilename))) {
-                if (! mkdir(dirname($cacheFilename), 0777, true))
-                    throw new \Exception('Could not create directory ' . dirname($cacheFilename));
-            }
-            copy($file->getPath(), $cacheFilename);
-            
-            $response = $this->getResponse()
-            ->setStatusCode(Response::STATUS_CODE_200)
-            ->setContent(file_get_contents($cacheFilename));
-            $response->getHeaders()->addHeaderLine('Content-Type', $file->getMimeType());
-            return $response;
+        $cacheFilename = 'public/' . $link->getUri();
+        if (! is_dir(dirname($cacheFilename))) {
+            if (! mkdir(dirname($cacheFilename), 0777, true))
+                throw new \Exception('Could not create directory ' . dirname($cacheFilename));
+        }
+        copy($file->getPath(), $cacheFilename);
+        
+        return $this->redirect()->toUrl($link->getUri() . '?' . time());
     }
     
     
