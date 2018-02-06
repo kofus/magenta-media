@@ -46,7 +46,6 @@ class MediaService extends AbstractService
             if (! is_readable($path) && isset($config['error_image']))
                 $path = $config['error_image'];
             
-            $imagick = new \Imagick($path);
             $imagick = $this->process($image, $display);
             $extension = strtolower($imagick->getImageFormat());
             
@@ -145,7 +144,10 @@ class MediaService extends AbstractService
         
         if ($node instanceof \Kofus\Media\Entity\PdfEntity)
             $path .= '[0]';
-        $imagick = new \Imagick($path);
+        
+        $imagick = new \Imagick();
+        $imagick->setResolution(300, 300);
+        $imagick->readImage($path);
         
         $pluginManager = new \Zend\Filter\FilterPluginManager();
         $filenames = scandir(__DIR__ . '/../Imagick/Filter');

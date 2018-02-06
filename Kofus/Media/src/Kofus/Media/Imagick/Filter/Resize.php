@@ -21,6 +21,8 @@ class Resize extends AbstractFilter
         
         // Fixed width and height => Thumbnail on canvas
         if (isset($this->options['width']) && isset($this->options['height'])) {
+            $imagick->scaleImage($this->options['width'], null);
+            
             $width = $this->options['width'];
             $height = $this->options['height'];
             if ($imagick->getImageWidth() > $width)
