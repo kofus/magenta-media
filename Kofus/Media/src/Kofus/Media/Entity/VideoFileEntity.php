@@ -25,7 +25,7 @@ class VideoFileEntity extends FileEntity
 	
 	protected function filterMimeType($value)
 	{
-	    if (preg_match('/video\/([0-9a-z]+)/i', $value, $matches)) {
+	    if (preg_match('/(video\/[0-9a-z]+)/i', $value, $matches)) {
 	        return $matches[1];
 	    }
 	    return $value;
