@@ -90,7 +90,9 @@ class MediaService extends AbstractService
                 $uriSegment = Rand::getString(16, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789');
             }
             
-            $uri = '/cache/media/video/' . $uriSegment . '.m4v';
+            $extension = str_replace('video/', '', $video->getMimeType());
+            
+            $uri = '/cache/media/video/' . $uriSegment . '.' . $extension;
             
             $link = new \Kofus\System\Entity\LinkEntity();
             $link->setLinkedNodeId($video->getNodeId())

@@ -100,7 +100,11 @@ return array(
                             'upload' => array (
                                 'class' => 'Kofus\Media\Form\Fieldset\VideoFile\UploadFieldset',
                                 'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\UploadHydrator'
-                            )
+                            ),
+                            'mime' => array (
+                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MimeTypeFieldset',
+                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MimeTypeHydrator'
+                            ),
                         )
                     ),
                     'edit' => array (
@@ -108,7 +112,12 @@ return array(
                             'upload' => array (
                                 'class' => 'Kofus\Media\Form\Fieldset\VideoFile\UploadEditFieldset',
                                 'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\UploadEditHydrator'
-                            )
+                            ),
+                            'mime' => array (
+                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MimeTypeFieldset',
+                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MimeTypeHydrator'
+                            ),
+                            
                         )
                     )
                 )

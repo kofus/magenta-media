@@ -12,6 +12,26 @@ class VideoFileEntity extends FileEntity
 		return 'VF';
 	}
 	
+	public function setMimeType($value)
+	{
+	    $this->mimeType = $this->filterMimeType($value); 
+	    return $this;
+	}
+	
+	public function getMimeType()
+	{
+	    return $this->filterMimeType($this->mimeType);
+	}
+	
+	protected function filterMimeType($value)
+	{
+	    if (preg_match('/video\/([0-9a-z]+)/i', $value, $matches)) {
+	        return $matches[1];
+	    }
+	    return $value;
+	}
+	
+	
 	public function __toString()
 	{
 	    return $this->getTitle() . ' (' . $this->getNodeId() . ')';
