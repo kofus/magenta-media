@@ -44,7 +44,7 @@ class Resize extends AbstractFilter
                 $canvas->newImage($width, $height, new \ImagickPixel('white'));
             }
             $canvas->setImageColorSpace($imagick->getImageColorSpace());
-            $canvas->compositeImage($imagick, \Imagick::COMPOSITE_DEFAULT, $x, $y, \Imagick::CHANNEL_ALPHA);
+            $canvas->compositeImage($imagick, \Imagick::COMPOSITE_DEFAULT, $x, $y, 0);
             $canvas->setImageFormat($imagick->getImageFormat());
             $imagick = $canvas;
                                 
