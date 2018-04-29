@@ -6,7 +6,7 @@ use Kofus\Media\Imagick\ImagickAwareInterface;
 /**
  * @ORM\Entity
  */
-class ImageEntity extends FileEntity implements ImagickAwareInterface 
+class ImageEntity extends FileEntity 
 {
 	public function getNodeType()
 	{
