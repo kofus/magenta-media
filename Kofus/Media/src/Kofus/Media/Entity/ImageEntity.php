@@ -1,11 +1,12 @@
 <?php
 namespace Kofus\Media\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Kofus\Media\Imagick\ImagickAwareInterface;
 
 /**
  * @ORM\Entity
  */
-class ImageEntity extends FileEntity 
+class ImageEntity extends FileEntity implements ImagickAwareInterface 
 {
 	public function getNodeType()
 	{

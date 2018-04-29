@@ -36,15 +36,15 @@ class MediaService extends AbstractService
         }
     } 
     
-    public function getImageLink(\Kofus\Media\Entity\ImageEntity $image, $display='thumb', array $options=array())
+    public function getImageLink($image, $display='thumb', array $options=array())
     {
         $link = $this->em()->getRepository('Kofus\System\Entity\LinkEntity')->findOneBy(array('linkedNodeId' => $image->getNodeId(), 'context' => $display));
         if (! $link) {
             $config = $this->config()->get('media.image.displays.available.' . $display);
             
-            $path = $image->getPath();
-            if (! is_readable($path) && isset($config['error_image']))
-                $path = $config['error_image'];
+            //$path = $image->getPath();
+            //if (! is_readable($path) && isset($config['error_image']))
+                //$path = $config['error_image'];
             
             $imagick = $this->process($image, $display);
             $extension = strtolower($imagick->getImageFormat());
@@ -134,7 +134,7 @@ class MediaService extends AbstractService
     }
     
     
-    public function process(\Kofus\Media\Entity\ImageEntity $node, $display)
+    public function process($node, $display)
     {
         $config = $this->config()->get('media.image.displays.available.' . $display);
         if (! $config)
