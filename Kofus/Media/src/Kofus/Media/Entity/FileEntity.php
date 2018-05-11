@@ -161,9 +161,22 @@ class FileEntity implements Node\NodeInterface, Node\EnableableNodeInterface
 		return $this->getNodeType() . $this->getId();
 	}
 	
+	/**
+	 * @ORM\Column(nullable=true)
+	 */
+	protected $path;
+	
 	public function getPath()
 	{
+	    if ($this->path)
+	        return $this->path;
+	    
 		return 'data/media/files/' . $this->getFilename();
+	}
+	
+	public function setPath($value)
+	{
+	    $this->path = $value; return $this;
 	}
 	
 	
