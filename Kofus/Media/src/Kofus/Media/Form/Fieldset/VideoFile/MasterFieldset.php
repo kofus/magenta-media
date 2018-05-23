@@ -7,7 +7,7 @@ use Zend\Form\Element;
 use Zend\Filter;
 use Zend\Validator;
 
-class MimeTypeFieldset extends Fieldset implements InputFilterProviderInterface
+class MasterFieldset extends Fieldset implements InputFilterProviderInterface
 {
 
     public function init()
@@ -16,6 +16,12 @@ class MimeTypeFieldset extends Fieldset implements InputFilterProviderInterface
             'label' => 'Mime-Type'
         ));
         $this->add($el);
+        
+        $el = new Element\Text('title', array(
+            'label' => 'Name'
+        ));
+        $this->add($el);
+        
         
     }
 
@@ -33,6 +39,19 @@ class MimeTypeFieldset extends Fieldset implements InputFilterProviderInterface
                     )
                 )
             ),
+            
+            'title' => array(
+                'required' => true,
+                'filters' => array(
+                    array(
+                        'name' => 'Zend\Filter\ToNull'
+                    ),
+                    array(
+                        'name' => 'Zend\Filter\StringTrim'
+                    )
+                )
+            ),
+            
             
             'enabled' => array(
                 'required' => false

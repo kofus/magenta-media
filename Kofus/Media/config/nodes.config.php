@@ -101,9 +101,9 @@ return array(
                                 'class' => 'Kofus\Media\Form\Fieldset\VideoFile\UploadFieldset',
                                 'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\UploadHydrator'
                             ),
-                            'mime' => array (
-                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MimeTypeFieldset',
-                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MimeTypeHydrator'
+                            'master' => array (
+                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MasterFieldset',
+                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MasterHydrator'
                             ),
                         )
                     ),
@@ -113,9 +113,9 @@ return array(
                                 'class' => 'Kofus\Media\Form\Fieldset\VideoFile\UploadEditFieldset',
                                 'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\UploadEditHydrator'
                             ),
-                            'mime' => array (
-                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MimeTypeFieldset',
-                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MimeTypeHydrator'
+                            'master' => array (
+                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MasterFieldset',
+                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MasterHydrator'
                             ),
                             
                         )
