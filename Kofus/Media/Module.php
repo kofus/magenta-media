@@ -3,6 +3,7 @@
 namespace Kofus\Media;
 
 use Zend\Mvc\MvcEvent;
+use Zend\Console\Adapter\AdapterInterface as Console;
 
 class Module
 {
@@ -29,5 +30,23 @@ class Module
     					),
     			),
     	);
-    }   
+    } 
+    
+    /**
+     * Assembles console help texts as provided in console router config (param "help_text")
+     * @return array
+     */
+    public function getConsoleUsage(Console $console)
+    {
+        $usage = array();
+        $config = $this->getConfig();
+        if (isset($config['console']['router']['routes'])) {
+            foreach ($config['console']['router']['routes'] as $route) {
+                if (isset($route['options']['help_text']))
+                    $usage[$route['options']['route']] = $route['options']['help_text'];
+            }
+        }
+        return $usage;
+    }
+    
 }
