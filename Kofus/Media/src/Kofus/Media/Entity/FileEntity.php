@@ -6,8 +6,7 @@ use Kofus\System\Node;
 /**
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\Table(name="kofus_media_files")
- * 
+ * @ORM\Table(name="kofus_media_files", uniqueConstraints={@ORM\UniqueConstraint(name="hash", columns={"hash"})})
  */
 class FileEntity implements Node\NodeInterface, Node\EnableableNodeInterface
 {
