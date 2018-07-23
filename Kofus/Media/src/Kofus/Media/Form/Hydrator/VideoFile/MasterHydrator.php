@@ -17,7 +17,8 @@ class MasterHydrator implements HydratorInterface
 
 	public function hydrate(array $data, $object)
 	{
-	    $object->setMimeType($data['mime']);
+	    if ($data['mime'])
+	       $object->setMimeType($data['mime']);
 	    $object->setTitle($data['title']);
 		return $object;
 	}

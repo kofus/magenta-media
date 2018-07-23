@@ -12,24 +12,24 @@ class MasterFieldset extends Fieldset implements InputFilterProviderInterface
 
     public function init()
     {
+        $el = new Element\Text('title', array(
+            'label' => 'Administrativer Titel'
+        ));
+        $this->add($el);
+        
         $el = new Element\Text('mime', array(
             'label' => 'Mime-Type'
         ));
+        $el->setAttribute('placeholder', 'z.B. video/webm');
+        $el->setOption('help-block', 'Video-Mime-Type wird automatisch ermittelt, wenn leer.');
         $this->add($el);
-        
-        $el = new Element\Text('title', array(
-            'label' => 'Name'
-        ));
-        $this->add($el);
-        
-        
     }
 
     public function getInputFilterSpecification()
     {
         return array(
             'mime' => array(
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'Zend\Filter\ToNull'
@@ -41,7 +41,7 @@ class MasterFieldset extends Fieldset implements InputFilterProviderInterface
             ),
             
             'title' => array(
-                'required' => true,
+                'required' => false,
                 'filters' => array(
                     array(
                         'name' => 'Zend\Filter\ToNull'

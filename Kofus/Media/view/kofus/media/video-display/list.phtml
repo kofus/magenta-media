@@ -4,25 +4,17 @@
     <div class="col-md-9">
         <?php if (count($this->paginator)) : ?>
             <table class="table table-hover">
-            	<thead>
-            		<tr>
-            			<th>ID</th>
-            			<th>Titel</th>
-            		</tr>
-            	</thead>
 				<tbody data-link="row" class="rowlink">
                     <?php foreach ($this->paginator as $entity) : ?>
                         <tr class="<?php if (!$entity->isEnabled()) echo 'danger'?>">
                             <td>
                                 <a href="<?php echo $this->url('kofus_media', array('controller' => 'video-display', 'action' => 'view', 'id' => $entity->getNodeId()), true) ?>">
-                                	<?php echo $entity->getNodeId() ?>
-                                </a>
-                            </td>
-                            <td>
                             	<?php $image = $this->nodes()->getRelatedNode($entity, 'IMG') ?>
                             	<?php if ($image) : ?>
                             		<img src="<?php echo $this->media()->getImageLink($image) ?>" > 
                             	<?php endif ?>
+                                </a>
+                            	
                             </td>
                             <td>
                             	<?php echo $this->escapeHtml($entity->getTitle()) ?>

@@ -44,6 +44,32 @@ class VideoFileController extends AbstractActionController
         return $this->redirect()->toUrl($link->getUri() . '?' . time());
     }
     
+    public function importAction()
+    {
+        $entity = new \Kofus\Media\Entity\VideoFileEntity();
+        
+        $form = $this->formBuilder()
+            ->setEntity($entity)
+            ->setContext('import')
+            ->setLabelSize('col-sm-3')->setFieldSize('sm-9')
+            ->buildForm()
+            ->add(new \Zend\Form\Element\Submit('submit', array('label' => 'Save')));
+            
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->getRequest()->getPost());
+            if ($form->isValid()) {
+                $this->em()->persist($entity);
+                $this->em()->flush();
+                return $this->redirect()->toUrl($this->archive()->uriStack()->pop());
+            }
+        }
+        
+        return new ViewModel(array(
+            'form' => $form->prepare(),
+            'formTemplate' => 'kofus/system/node/form/panes.phtml'
+        ));
+    }
+    
     
     
     	

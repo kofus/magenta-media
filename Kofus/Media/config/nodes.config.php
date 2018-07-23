@@ -119,7 +119,22 @@ return array(
                             ),
                             
                         )
-                    )
+                    ),
+                    'import' => array (
+                        'fieldsets' => array (
+                            'import' => array (
+                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\ImportFieldset',
+                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\ImportHydrator'
+                            ),
+                            'master' => array (
+                                'class' => 'Kofus\Media\Form\Fieldset\VideoFile\MasterFieldset',
+                                'hydrator' => 'Kofus\Media\Form\Hydrator\VideoFile\MasterHydrator'
+                            ),
+                            
+                        )
+                    ),
+                    
+                    
                 )
                 
             )
@@ -129,6 +144,7 @@ return array(
     'relations' => array(
         'available' => array(
             'VD_VF' => array(
+                
             ),
         )
     )

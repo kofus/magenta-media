@@ -38,7 +38,38 @@ class VideoDisplayEntity implements Node\NodeInterface, Node\EnableableNodeInter
 	{
 		return $this->title;
 	}
-		
+	
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	protected $priority;
+	
+	public function setPriority($value)
+	{
+	    $this->priority = $value; return $this;
+	}
+	
+	public function getPriority()
+	{
+	    return $this->priority;
+	}
+	
+	/**
+	 * @ORM\Column(type="json_array")
+	 */
+	protected $params = array();
+	
+	public function setParam($key, $value)
+	{
+	    $this->params[$key] = $value; return $this;
+	}
+	
+	public function getParam($key)
+	{
+	    if (array_key_exists($key, $this->params))
+	        return $this->params[$key];
+	}
+	
 	
 	/**
 	 * @ORM\Column(type="boolean")

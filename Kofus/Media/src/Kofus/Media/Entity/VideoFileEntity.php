@@ -34,7 +34,12 @@ class VideoFileEntity extends FileEntity
 	
 	public function __toString()
 	{
-	    return $this->getMimeType() . ': ' . $this->getTitle() . ' (' . $this->getNodeId() . ')';
+	    $s = $this->getMimeType();
+	    if ($this->getTitle())
+	        $s .= ': ' . $this->getTitle();
+	    $s .= ' (' . $this->getNodeId() . ')';
+	    
+	    return $s; 
 	}
 }
 
