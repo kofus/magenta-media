@@ -16,6 +16,8 @@ class UploadEditHydrator implements HydratorInterface, ServiceLocatorAwareInterf
 
 	public function hydrate(array $data, $object)
 	{
+	    $config = $this->getServiceLocator()->get('KofusConfig');
+	    
 	    if (! isset($data['file']))
 	        return $object;
 	    
@@ -40,7 +42,8 @@ class UploadEditHydrator implements HydratorInterface, ServiceLocatorAwareInterf
 	    if (! move_uploaded_file($fileInfo['tmp_name'], $target))
 	    	throw new \Exception('Uploaded file "'.$fileInfo['tmp_name'].'" could not be moved to "'.$target.'"');
 	    
-	    $object->setHash(md5_file($target));	    
+    	if ($config->get('media.file.' . $object->getNodeType() . '.hashing', false))
+    	    $object->setHash(md5_file($target));	    
 		return $object;
 	}
 	

@@ -17,8 +17,6 @@ class UploadHydrator implements HydratorInterface, ServiceLocatorAwareInterface
 	{
 	    $config = $this->getServiceLocator()->get('KofusConfig');
 	    
-	    
-    	    
 	    // Create filename
 	    if (! $object->getFilename())
 	        $object->setFilename(\Zend\Math\Rand::getString(16, 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'));
