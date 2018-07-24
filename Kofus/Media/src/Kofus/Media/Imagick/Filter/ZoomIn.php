@@ -18,6 +18,16 @@ class ZoomIn extends AbstractFilter
         if ($this->getHeight() > $value->getImageHeight())
             $value->scaleImage(null, $this->getHeight());
         
+        $mock1 = clone $value;
+        $mock1->scaleImage($this->getWidth(), null);
+        if ($mock1->getImageHeight() >= $this->getHeight())
+            $value->scaleImage($this->getWidth(), null);
+        
+        $mock2 = clone $value;
+        $mock2->scaleImage(null, $this->getHeight());
+        if ($mock2->getImageWidth() >= $this->getWidth())
+            $value->scaleImage(null, $this->getHeight());
+        
         switch ($this->getZoom()) {
             case self::ZOOM_NORTH:
                 $value->cropImage(
