@@ -13,7 +13,7 @@ class VideoDisplayController extends AbstractActionController
     {
         $this->archive()->uriStack()->push();
         $qb = $this->nodes()->createQueryBuilder('VD');
-        $qb->orderBy('n.id', 'DESC');
+        $qb->orderBy('n.priority', 'ASC');
         $paginator = $this->paginator($qb);
         
         return new ViewModel(array(

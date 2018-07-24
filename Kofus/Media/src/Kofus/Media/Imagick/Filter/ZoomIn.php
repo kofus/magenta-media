@@ -4,6 +4,9 @@ use Kofus\Media\Imagick\AbstractFilter;
 
 class ZoomIn extends AbstractFilter
 {
+    const ZOOM_CENTER   = 'center';
+    const ZOOM_NORTH    = 'north';
+    
     public function filter($value)
     {
         if (! $value instanceof \Imagick)
@@ -15,16 +18,44 @@ class ZoomIn extends AbstractFilter
         if ($this->getHeight() > $value->getImageHeight())
             $value->scaleImage(null, $this->getHeight());
         
-            
-        $value->cropImage(
-            $this->getWidth(), 
-            $this->getHeight(), 
-            ($value->getImageWidth() - $this->getWidth()) / 2, 
-            ($value->getImageHeight() - $this->getHeight()) / 2
-        );
+        switch ($this->getZoom()) {
+            case self::ZOOM_NORTH:
+                $value->cropImage(
+                    $this->getWidth(),
+                    $this->getHeight(),
+                    ($value->getImageWidth() - $this->getWidth()) / 2,
+                    0
+                );
+                break;
+                
+            case self::ZOOM_CENTER:
+                $value->cropImage(
+                    $this->getWidth(),
+                    $this->getHeight(),
+                    ($value->getImageWidth() - $this->getWidth()) / 2,
+                    ($value->getImageHeight() - $this->getHeight()) / 2
+                );
+                break;
+                
+            default:
+                throw new \Exception('no zoom defined');
+        }
         
         return $value;
     }
+    
+    public function setZoom($value)
+    {
+        $this->options['zoom'] = $value; return $this;
+    }
+    
+    public function getZoom()
+    {
+        if (! isset($this->options['zoom']))
+            $this->options['zoom'] = self::ZOOM_CENTER;
+            return $this->options['zoom'];
+    }
+    
     
     public function setWidth($value)
     {
