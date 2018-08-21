@@ -40,7 +40,7 @@ class VideoDisplayEntity implements Node\NodeInterface, Node\EnableableNodeInter
 	}
 	
 	/**
-	 * @ORM\Column(type="integer")
+	 * @ORM\Column(type="integer", nullable=true)
 	 */
 	protected $priority;
 	
