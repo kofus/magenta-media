@@ -31,7 +31,7 @@ class ImageEntity extends FileEntity
 		$this->width = $value; return $this;
 	}
 	
-	public function getWidt()
+	public function getWidth()
 	{
 		return $this->width;
 	}	
