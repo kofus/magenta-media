@@ -63,7 +63,7 @@ class UploadFieldset extends Fieldset implements InputFilterProviderInterface
 
     public function getInputFilterSpecification()
     {
-        $mimeType = new Validator\File\MimeType(array('mimeType' => array('application/pdf', 'application/octet-stream')));
+        $mimeType = new Validator\File\MimeType(array('mimeType' => array('application/pdf')));
         $filesize = new Validator\File\Size(array('max' => $this->getMaxFilesize() . 'MB'));
         
         return array(
