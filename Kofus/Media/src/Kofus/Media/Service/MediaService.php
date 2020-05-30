@@ -120,6 +120,13 @@ class MediaService extends AbstractService
     	    }
     	    
     	    $uri = '/cache/media/pdf/' . $uriSegment . '.pdf';
+    	    
+    	    // Duplicate uri?
+    	    $link = $this->em()->getRepository('Kofus\System\Entity\LinkEntity')->findOneBy(array('uri' => $uri));
+    	    if ($link) {
+    	        // throw new \Exception('Link for ' . $uri . ' already referes to node ' . $link->getLinkedNodeId() . '; cannot link  ' . $pdf->getNodeId());
+    	        $uri = '/cache/media/pdf/' . $uriSegment . '-' . strtolower($pdf->getNodeId()) . '.pdf';
+    	    }
     
     		$link = new \Kofus\System\Entity\LinkEntity();
     		$link->setLinkedNodeId($pdf->getNodeId())
