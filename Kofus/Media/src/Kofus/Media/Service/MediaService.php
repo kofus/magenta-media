@@ -157,8 +157,10 @@ class MediaService extends AbstractService
         $imagick = new \Imagick();
         $imagick->setResolution(300, 300);
         $imagick->readImage($path);
+        $imagick->setOption('nodeId', $node->getNodeId());
         
         $pluginManager = new \Zend\Filter\FilterPluginManager();
+        $pluginManager->setServiceLocator($this->getServiceLocator());
         $filenames = scandir(__DIR__ . '/../Imagick/Filter');
         foreach ($filenames as $filename) {
             if (in_array($filename, array('.', '..')))
