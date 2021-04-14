@@ -13,7 +13,7 @@ class ImageController extends AbstractActionController
         $uri = $this->getRequest()->getRequestUri();
         $link = $this->em()->getRepository('Kofus\System\Entity\LinkEntity')->findOneBy(array('uri' => $uri));
         if (! $link) {
-            $fullUri = 'http://' . $_SERVER['HTTP_HOST'] . $uri;
+            $fullUri = $this->getRequest()->getUri()->getScheme() . '://' . $this->getRequest()->getUri()->getHost() . $uri;
             $link = $this->em()->getRepository('Kofus\System\Entity\LinkEntity')->findOneBy(array('uri' => $fullUri));
         }
         
